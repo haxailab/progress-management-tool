@@ -59,7 +59,7 @@ app.add_middleware(
 )
 
 # ファイルアップロード用ディレクトリ
-UPLOAD_DIR = "/data/uploads"
+UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./data/uploads")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 DEFAULT_ADMIN_EMAIL = os.getenv("DEFAULT_ADMIN_EMAIL", "admin@example.com")
