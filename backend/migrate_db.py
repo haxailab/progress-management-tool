@@ -19,9 +19,9 @@ def migrate():
         if 'progress' not in columns:
             print("Adding progress column to issues table...")
             cursor.execute("ALTER TABLE issues ADD COLUMN progress INTEGER DEFAULT 0")
-            print("✓ Added progress column")
+            print("Added progress column")
         else:
-            print("✓ Progress column already exists")
+            print("Progress column already exists")
 
         # Check if issue_dependencies table exists
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='issue_dependencies'")
@@ -38,9 +38,9 @@ def migrate():
                     FOREIGN KEY (target_issue_id) REFERENCES issues(id)
                 )
             """)
-            print("✓ Created issue_dependencies table")
+            print("Created issue_dependencies table")
         else:
-            print("✓ issue_dependencies table already exists")
+            print("issue_dependencies table already exists")
 
         # Check if project_members table exists
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='project_members'")
@@ -57,9 +57,9 @@ def migrate():
                     FOREIGN KEY (user_id) REFERENCES users(id)
                 )
             """)
-            print("✓ Created project_members table")
+            print("Created project_members table")
         else:
-            print("✓ project_members table already exists")
+            print("project_members table already exists")
 
         # Check if project_join_requests table exists
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='project_join_requests'")
@@ -80,9 +80,9 @@ def migrate():
                     FOREIGN KEY (reviewed_by) REFERENCES users(id)
                 )
             """)
-            print("✓ Created project_join_requests table")
+            print("Created project_join_requests table")
         else:
-            print("✓ project_join_requests table already exists")
+            print("project_join_requests table already exists")
 
         # Migrate existing projects - add owners as members
         print("Migrating existing projects to add owners as members...")
@@ -96,10 +96,10 @@ def migrate():
                 AND project_members.user_id = projects.owner_id
             )
         """)
-        print("✓ Migrated existing project owners to members")
+        print("Migrated existing project owners to members")
 
         conn.commit()
-        print("\n✓ Database migration completed successfully!")
+        print("\nDatabase migration completed successfully!")
 
     except Exception as e:
         print(f"✗ Migration failed: {e}")

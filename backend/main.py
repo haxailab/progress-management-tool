@@ -296,7 +296,7 @@ def init_db(db: Session):
     db.add_all(issues4)
 
     db.commit()
-    print("✓ サンプルプロジェクトを4つ作成しました")
+    print("Created 4 sample projects")
 
 # 起動時に初期データ作成
 @app.on_event("startup")
